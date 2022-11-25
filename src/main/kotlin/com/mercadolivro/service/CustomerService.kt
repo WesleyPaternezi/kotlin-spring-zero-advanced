@@ -21,8 +21,8 @@ class CustomerService(
         customerRepository.save(customer)
     }
 
-    fun customerById(id : Int): CustomerModel {
-        return customerRepository.findById(id).get()
+    fun getById(id : Int): CustomerModel {
+        return customerRepository.findById(id).orElseThrow()
     }
 
     fun update(customer: CustomerModel) {
