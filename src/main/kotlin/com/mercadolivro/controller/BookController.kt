@@ -15,18 +15,11 @@ class BookController(
     val bookService: BookService,
     val customerService: CustomerService,
 ) {
-//    @PostMapping
-//    @ResponseStatus(HttpStatus.CREATED)
-//    fun create(@RequestBody request: PostBookRequest){
-//        val customer = customerService.getById(request.customerId)
-//        bookService.create(request.toBookModel(customer))
-//    }
-
     @PostMapping
-    fun create(@RequestBody request: PostBookRequest) : ResponseEntity<PostBookRequest>{
+    @ResponseStatus(HttpStatus.CREATED)
+    fun create(@RequestBody request: PostBookRequest){
         val customer = customerService.getById(request.customerId)
         bookService.create(request.toBookModel(customer))
-        return ResponseEntity.status(201).build()
     }
 
     @GetMapping

@@ -1,5 +1,12 @@
 version: '3.8'
+
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
+  fulfillment-service-data:
+
 services:
+
   db:
     image: postgres:14.1
     restart: always
@@ -9,5 +16,21 @@ services:
       - POSTGRES_DB=mercadolivro
     ports:
       - '5432:5432'
+
+  prometheus:
+    image: prom/prometheus:v2.20.0
     volumes:
-      - ./src/main/resources/db/migration/sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - ./observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus/crm-fulfillment-service
+    ports:
+      - '9190:9090'
+    restart: always
+
+  grafana:
+    image: grafana/grafana:7.2.0
+    ports:
+      - '3010:3000'
+    volumes:
+      - ./observability/grafana:/etc/grafana/provising
+      - grafana_data:/var/lib/grafana/card-invoice
+    restart: always

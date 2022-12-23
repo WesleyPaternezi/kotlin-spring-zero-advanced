@@ -1,0 +1,9 @@
+apiVersion: 1
+
+providers:
+  - name: Cortex
+    type: prometheus
+    url: http://host.docker.internal:9190
+    isDefault:
+    access: proxy
+    editable: true
