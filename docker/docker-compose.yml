@@ -1,9 +1,12 @@
 version: '3.8'
 
+networks:
+  mercado-livro:
+    driver: bridge
+
 volumes:
   prometheus_data: {}
   grafana_data: {}
-  fulfillment-service-data:
 
 services:
 
@@ -18,19 +21,23 @@ services:
       - '5432:5432'
 
   prometheus:
-    image: prom/prometheus:v2.20.0
+    image: prom/prometheus:latest
     volumes:
       - ./observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus_data:/prometheus/crm-fulfillment-service
+      - prometheus_data:/prometheus
+    networks:
+      - mercado-livro
     ports:
-      - '9190:9090'
+      - '9090:9090'
     restart: always
 
   grafana:
-    image: grafana/grafana:7.2.0
+    image: grafana/grafana:latest
+    networks:
+      - mercado-livro
     ports:
-      - '3010:3000'
+      - '3000:3000'
     volumes:
-      - ./observability/grafana:/etc/grafana/provising
-      - grafana_data:/var/lib/grafana/card-invoice
+      - ./observability/grafana/datasources:/etc/grafana/provisioning/datasources
+      - grafana_data:/var/lib/grafana
     restart: always

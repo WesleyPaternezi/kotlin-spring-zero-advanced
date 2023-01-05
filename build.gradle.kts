@@ -29,6 +29,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	//conexao postgres
 	runtimeOnly ("org.postgresql:postgresql")
+	//observability
+	implementation ("io.micrometer:micrometer-registry-prometheus")
+	implementation ("org.springframework.boot:spring-boot-starter-actuator")
 }
 
 tasks.withType<KotlinCompile> {

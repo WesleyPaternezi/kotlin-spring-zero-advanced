@@ -1,6 +1,6 @@
-package com.mercadolivro.controller
+package com.mercadolivro.application.controller
 
-import com.mercadolivro.controller.request.PostBookRequest
+import com.mercadolivro.application.controller.request.PostBookRequest
 import com.mercadolivro.extension.toBookModel
 import com.mercadolivro.model.BookModel
 import com.mercadolivro.service.BookService

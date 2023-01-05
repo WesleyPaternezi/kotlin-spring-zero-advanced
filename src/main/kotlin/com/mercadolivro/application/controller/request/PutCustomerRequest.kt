@@ -1,4 +1,4 @@
-package com.mercadolivro.controller.request
+package com.mercadolivro.application.controller.request
 
 class PutCustomerRequest(
     var name: String,

@@ -1,7 +1,8 @@
-package com.mercadolivro.controller
+package com.mercadolivro.application.controller
 
-import com.mercadolivro.controller.request.PostCustomerRequest
-import com.mercadolivro.controller.request.PutCustomerRequest
+import com.mercadolivro.application.controller.request.PostCustomerRequest
+import com.mercadolivro.application.controller.request.PutCustomerRequest
+import com.mercadolivro.commons.metrics.AppMetrics
 import com.mercadolivro.extension.toCustomerModel
 import com.mercadolivro.model.CustomerModel
 import com.mercadolivro.service.CustomerService
@@ -11,8 +12,14 @@ import org.springframework.web.bind.annotation.*
 @RestController()
 @RequestMapping("customers")
 class CustomerController(
-    val customerService: CustomerService
+    val customerService: CustomerService,
+    val metrics: AppMetrics
 ) {
+    @GetMapping("/welcome")
+    fun welcomeCustomer(): String{
+        metrics.incrementMetricAction("success", "welcome")
+        return "Welcome Customer"
+    }
 
     @GetMapping
     fun customersAll(@RequestParam name: String?): List<CustomerModel>{

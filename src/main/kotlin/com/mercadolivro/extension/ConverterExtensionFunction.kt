@@ -1,8 +1,8 @@
 package com.mercadolivro.extension
 
-import com.mercadolivro.controller.request.PostBookRequest
-import com.mercadolivro.controller.request.PostCustomerRequest
-import com.mercadolivro.controller.request.PutCustomerRequest
+import com.mercadolivro.application.controller.request.PostBookRequest
+import com.mercadolivro.application.controller.request.PostCustomerRequest
+import com.mercadolivro.application.controller.request.PutCustomerRequest
 import com.mercadolivro.enums.BookStatus
 import com.mercadolivro.model.BookModel
 import com.mercadolivro.model.CustomerModel
